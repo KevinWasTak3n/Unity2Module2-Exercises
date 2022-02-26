@@ -12,6 +12,11 @@ public class CubeController : MonoBehaviour
 
     public float health;
     public int score;
+    public float minSpeed;
+    public float maxSpeed;
+
+    //contains the data
+    public Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +24,9 @@ public class CubeController : MonoBehaviour
         health = 100;
         score = 0;
         currentNum = 0;
+
+        //get the reference
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -41,5 +49,15 @@ public class CubeController : MonoBehaviour
              scoreText.text = "Score: " + score.ToString();
             print(score);
         }
+    }
+    
+    //runs on a consistent timer
+    void FixedUpdate()
+    {
+        //always used for physics calculations or manipulation
+        float x_move = Random.Range(minSpeed,maxSpeed);
+        float y_move = Random.Range(minSpeed,maxSpeed);
+        float z_move = Random.Range(minSpeed,maxSpeed);
+        rb.AddForce(x_move, y_move, z_move);
     }
 }
